@@ -1,0 +1,81 @@
+package projects;
+
+import java.util.Scanner;
+
+class ATM {
+	float Balance;
+	int pin = 1513;
+
+	public void chekpin() {
+		System.out.println("enter your pin");
+		int enterpin;
+		do {
+			Scanner sc = new Scanner(System.in);
+			enterpin = sc.nextInt();
+			if (enterpin == pin) {
+				menu();
+			} else {
+				System.out.println("enter a valid pin");
+			}
+		} while (enterpin != pin);
+	}
+
+	public void menu() {
+		System.out.println("Enter your choice");
+		System.out.println("1 chek a/c balance");
+		System.out.println("2 withdraa money");
+		System.out.println("3 Deposit money");
+		System.out.println("4 Exit");
+		Scanner sc = new Scanner(System.in);
+		int opt = sc.nextInt();
+		if (opt == 1) {
+			chekbalance();
+		} else if (opt == 2) {
+			withdraamoney();
+		} else if (opt == 3) {
+			depositmoney();
+		} else if (opt == 4) {
+			return;
+		} else {
+			System.out.println("Enter a valid choice");
+
+		}
+
+	}
+
+	public void chekbalance() {
+		System.out.println("Balance:" + Balance);
+		menu();
+	}
+
+	public void withdraamoney() {
+		System.out.println("Enter Amount to withdraa:");
+		Scanner sc = new Scanner(System.in);
+		float amount = sc.nextFloat();
+		if (amount > Balance) {
+			System.out.println("insuficient Balance");
+		} else {
+			Balance = Balance - amount;
+			System.out.println("Money Withdraa Successful");
+		}
+		menu();
+	}
+
+	public void depositmoney() {
+		System.out.println("Enter the amount");
+		Scanner sc = new Scanner(System.in);
+		float amount = sc.nextFloat();
+		Balance = Balance + amount;
+		System.out.println("money diposite is successfull");
+		menu();
+	}
+
+}
+
+public class ATMMachine {
+	public static void main(String[] args) {
+		ATM obj = new ATM();
+		obj.chekpin();
+	}
+
+}
